@@ -16,9 +16,9 @@ var header = doc.indexOf('2015');
     var data = d3.csvParseRows(doc, map);
 
 
-    function map(d) {
+  function map(d, i) {
         return {
-            Ziekte: (d[3]),
+            Ziekte: "Ziekte " + (i+1),
             Totaal: Number(d[5]),
             Mannen: Number(d[6]),
             Vrouwen: Number(d[7])
@@ -46,7 +46,7 @@ var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
     firstX.domain(data.map(function (d, index) {
-        return "Ziekte " + (index + 1);
+        return "d.Ziekte;
     }));
     firstY.domain([0, d3.max(data, function (d) {
         return d.Totaal;
@@ -77,7 +77,7 @@ var g = svg.append("g")
         .enter().append("rect")
         .attr("class", "bar")
         .attr("x", function (d, index) {
-            return firstX("Ziekte " + (index + 1));
+            return firstX(d.Ziekte);
         })
         .attr("width", firstX.bandwidth())
         .attr("y", height)
@@ -176,7 +176,7 @@ Tevens maak ik een functie aan met een event click die de onChange functie laat 
 Tot slot heb ik nog een sorteer functie aangemaakt waarmee mijn bars op grafiek 1 gesorteerd worden.
 
 ```js
-d3.select("input").on("change", change);
+   d3.select("input").on("change", change);
 
     // ik maak hier een variabele aan waarin ik een functie stop die de functie change in werk laat gaan als het input element in de HTML gecheckt wordt
     var sorteer = (function () {
@@ -191,6 +191,7 @@ d3.select("input").on("change", change);
                     return d3.ascending(a.Ziekte, b.Ziekte);
                 })
                 .map(function (d) {
+           
                     return d.Ziekte;
                 }))
             .copy();
@@ -211,11 +212,12 @@ d3.select("input").on("change", change);
                 return x0(d.Ziekte);
             });
 
-        transition.select("axis axis--x")
-            .call(firstX)
+        transition.select(".axis--x")
+            .call(d3.axisBottom(x0))
             .selectAll("g")
             .delay(delay);
     }
+
 ```
 
 

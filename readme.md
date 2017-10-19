@@ -46,7 +46,7 @@ var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
     firstX.domain(data.map(function (d, index) {
-        return "d.Ziekte;
+        return "d.Ziekte";
     }));
     firstY.domain([0, d3.max(data, function (d) {
         return d.Totaal;

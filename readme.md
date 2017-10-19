@@ -220,5 +220,15 @@ Tot slot heb ik nog een sorteer functie aangemaakt waarmee mijn bars op grafiek 
 
 ```
 
+## Features
 
+.scaleBand()
+.rangeRound()
+.scaleLinear(
+.get()
+.domain()
+.append()
+.selectAll()
+.enter()
+.ease(d3.easeBounce)
 
